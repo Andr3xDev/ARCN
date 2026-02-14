@@ -2,6 +2,7 @@
 
 ## SOLID Principles Lab
 A practical implementation of the five SOLID principles in Java
+By Andres Felipe Chavarro Plazas
 
 </div>
 
