@@ -1,6 +1,7 @@
 package escuelaing.arcn.solid.isp;
 
 public class Human implements Workable, Eatable {
+    private boolean hasEaten = false;
     
     @Override
     public void work() {
@@ -9,6 +10,11 @@ public class Human implements Workable, Eatable {
     
     @Override
     public void eat() {
+        hasEaten = true;
         System.out.println("Eating lunch...");
+    }
+    
+    public boolean hasEaten() {
+        return hasEaten;
     }
 }
