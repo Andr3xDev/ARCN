@@ -1,53 +1,118 @@
-<div align="center">
+# Laboratorio BDD con Cucumber y Selenium
 
-## SOLID Principles Lab
-A practical implementation of the five SOLID principles in Java
-By Andres Felipe Chavarro Plazas
 
-</div>
+## Descripción
 
-<br>
-<br>
+Este laboratorio implementa pruebas automatizadas usando **Behavior Driven Development (BDD)** con Cucumber y Selenium WebDriver. El proyecto está dividido en dos partes principales que demuestran el flujo completo de desarrollo orientado a comportamiento.
 
-## Description
+---
 
-This laboratory demonstrates the implementation of the five SOLID principles through simple, practical examples. Each principle has been refactored from problematic code to clean, maintainable solutions following best practices.
+## Parte 1: Configuración Inicial y Primer Escenario
 
-<br>
+En esta primera parte se establece la estructura base del proyecto BDD y se implementa un escenario de prueba básico para validar la configuración.
 
-## Exercises
+### Objetivos de la Parte 1
 
-### 1. Single Responsibility Principle (SRP)
+- Configurar el proyecto Maven con las dependencias de Selenium y Cucumber
+- Crear la estructura de carpetas para BDD (features, steps, runners)
+- Implementar un escenario de prueba simple
+- Generar reportes en múltiples formatos (HTML, JSON, JUnit)
 
-**Problem**: The `Invoice` class had multiple responsibilities (calculation, printing, and persistence).
+### Estructura del Proyecto
 
-**Solution**: Separated into three classes:
-- `Invoice` - manages invoice data and calculations
-- `InvoicePrinter` - handles printing logic
-- `InvoiceRepository` - manages database persistence
+```
+bdd-lab/
+├── src/
+│   ├── main/java/
+│   └── test/java/
+│       ├── features/          # Archivos .feature con escenarios Gherkin
+│       ├── steps/             # Step Definitions (implementación de pasos)
+│       └── runners/           # Test Runners de Cucumber
+├── pom.xml
+└── README.md
+```
 
-**Design Patterns**: Repository Pattern, Separation of Concerns
+### Tecnologías Utilizadas
 
-<br>
+- **Java 21**
+- **Maven** - Gestión de dependencias y construcción
+- **Selenium WebDriver 4.0.0** - Automatización de navegador
+- **Cucumber 7.0.0** - Framework BDD
+- **JUnit 4** - Framework de pruebas
+- **ChromeDriver** - Driver para automatización de Chrome
 
-### 2. Open/Closed Principle (OCP)
+### Escenario de Prueba
 
-**Problem**: The `DiscountCalculator` class required modification to add new discount types.
+Se implementó un escenario básico de búsqueda en Google para validar la configuración:
 
-**Solution**: Created the `DiscountStrategy` interface with implementations:
-- `RegularDiscount` - 10% discount
-- `VIPDiscount` - 20% discount
+**Feature:** Google Search  
+**Escenario:** Búsqueda de un término  
 
-**Design Patterns**: Strategy Pattern, Polymorphism
+*[Insertar captura del archivo .feature]*
 
-<br>
+### Ejecución de Pruebas
 
-### 3. Liskov Substitution Principle (LSP)
+Las pruebas se ejecutan mediante Maven:
 
-**Problem**: `ElectricCar` threw exceptions when calling `refuel()`.
+```bash
+mvn test
+```
 
-**Solution**: Segregated interfaces:
-- `Vehicle` - common driving behavior
+### Resultados
+
+*[Insertar captura de la consola mostrando BUILD SUCCESS]*
+
+### Reportes Generados
+
+El proyecto genera tres tipos de reportes después de cada ejecución:
+
+#### Reporte HTML
+Ubicación: `target/HtmlReports/report.html`
+
+*[Insertar captura del reporte HTML de Cucumber]*
+
+#### Reporte JSON
+Ubicación: `target/JSonReports/report.json`
+
+*[Insertar descripción o captura del reporte JSON]*
+
+#### Reporte JUnit XML
+Ubicación: `target/JUnitReports/report.xml`
+
+*[Insertar descripción o captura del reporte XML]*
+
+---
+
+## Parte 2: [Pendiente]
+
+*Esta sección se completará en la segunda parte del laboratorio*
+
+### Objetivos de la Parte 2
+
+*[Por completar]*
+
+### Nuevos Escenarios
+
+*[Por completar]*
+
+### Resultados y Análisis
+
+*[Por completar]*
+
+---
+
+## Conclusiones
+
+*[Por completar al finalizar ambas partes]*
+
+---
+
+## Referencias
+
+- [Cucumber Documentation](https://cucumber.io/docs/cucumber/)
+- [Selenium WebDriver Documentation](https://www.selenium.dev/documentation/)
+- [Gherkin Syntax](https://cucumber.io/docs/gherkin/)
+
 - `Refuelable` - for gas vehicles
 - `Rechargeable` - for electric vehicles
 
