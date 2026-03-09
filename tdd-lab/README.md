@@ -1,131 +1,206 @@
 <div align="center">
 
-## SOLID Principles Lab
-A practical implementation of the five SOLID principles in Java
+## TDD Laboratory - FizzBuzz
+Test-Driven Development practice with Java and JUnit 5
 By Andres Felipe Chavarro Plazas
 
 </div>
 
 <br>
-<br>
 
 ## Description
 
-This laboratory demonstrates the implementation of the five SOLID principles through simple, practical examples. Each principle has been refactored from problematic code to clean, maintainable solutions following best practices.
+This laboratory demonstrates the Test-Driven Development (TDD) methodology through the classic FizzBuzz problem. The project follows the Red-Green-Refactor cycle to build robust, well-tested code.
 
 <br>
 
-## Exercises
+## What is TDD?
 
-### 1. Single Responsibility Principle (SRP)
+Test-Driven Development is a software development approach where tests are written before the actual implementation code. The process follows three steps:
 
-**Problem**: The `Invoice` class had multiple responsibilities (calculation, printing, and persistence).
+### 1. RED - Write a Failing Test
+- Write a test that describes the desired behavior
+- Run the test and watch it fail (because the functionality doesn't exist yet)
+- This failure confirms the test is actually testing something
 
-**Solution**: Separated into three classes:
-- `Invoice` - manages invoice data and calculations
-- `InvoicePrinter` - handles printing logic
-- `InvoiceRepository` - manages database persistence
+### 2. GREEN - Make the Test Pass
+- Write the minimum amount of code necessary to make the test pass
+- Focus only on making the test work, not on writing perfect code
+- Run the test again to verify it passes
 
-**Design Patterns**: Repository Pattern, Separation of Concerns
+### 3. REFACTOR - Improve the Code
+- Clean up the code while keeping all tests passing
+- Remove duplication, improve naming, and enhance readability
+- Run tests frequently to ensure nothing breaks during refactoring
 
-<br>
+### Why TDD?
 
-### 2. Open/Closed Principle (OCP)
-
-**Problem**: The `DiscountCalculator` class required modification to add new discount types.
-
-**Solution**: Created the `DiscountStrategy` interface with implementations:
-- `RegularDiscount` - 10% discount
-- `VIPDiscount` - 20% discount
-
-**Design Patterns**: Strategy Pattern, Polymorphism
-
-<br>
-
-### 3. Liskov Substitution Principle (LSP)
-
-**Problem**: `ElectricCar` threw exceptions when calling `refuel()`.
-
-**Solution**: Segregated interfaces:
-- `Vehicle` - common driving behavior
-- `Refuelable` - for gas vehicles
-- `Rechargeable` - for electric vehicles
-
-**Design Patterns**: Interface Segregation, Composition over Inheritance
+- **Tests First**: Forces you to think about requirements before coding
+- **Living Documentation**: Tests document how the code should behave
+- **Confidence**: Refactor safely knowing tests will catch regressions
+- **Better Design**: Writing testable code leads to better architecture
+- **Debugging**: When a test fails, you know exactly what broke
 
 <br>
 
-### 4. Interface Segregation Principle (ISP)
+## The FizzBuzz Problem
 
-**Problem**: The `Worker` interface forced implementations to define unnecessary methods.
-
-**Solution**: Split into specific interfaces:
-- `Workable` - for entities that can work
-- `Eatable` - for entities that can eat
-
-**Design Patterns**: Interface Segregation, Role Interfaces
+Write a function that takes an integer and returns:
+- "Fizz" for multiples of 3
+- "Buzz" for multiples of 5
+- "FizzBuzz" for multiples of both 3 and 5 (i.e., multiples of 15)
+- The number as a string for all other cases
 
 <br>
 
-### 5. Dependency Inversion Principle (DIP)
+## How This Lab Was Built Using TDD
 
-**Problem**: `OrderProcessor` was tightly coupled to `MySQLDatabase`.
+### Iteration 1: Return the number
+**Test**: Input 1 should return "1"
+```java
+assertEquals("1", FizzBuzz.fizzbuzz(1));
+```
+**Implementation**: Return the number as a string
+```java
+return String.valueOf(n);
+```
 
-**Solution**: Created the `Database` interface with implementations:
-- `MySQLDatabase`
-- `PostgreSQLDatabase`
+### Iteration 2: Handle multiples of 3
+**Test**: Input 3 should return "Fizz"
+```java
+assertEquals("Fizz", FizzBuzz.fizzbuzz(3));
+```
+**Implementation**: Add conditional for multiples of 3
+```java
+if (n % 3 == 0) return "Fizz";
+else return String.valueOf(n);
+```
 
-The `OrderProcessor` now depends on the abstraction via constructor injection.
+### Iteration 3: Handle multiples of 5
+**Test**: Input 5 should return "Buzz"
+```java
+assertEquals("Buzz", FizzBuzz.fizzbuzz(5));
+```
+**Implementation**: Add conditional for multiples of 5
+```java
+if (n % 3 == 0) return "Fizz";
+else if (n % 5 == 0) return "Buzz";
+else return String.valueOf(n);
+```
 
-**Design Patterns**: Dependency Injection, Inversion of Control
+### Iteration 4: Handle multiples of both
+**Test**: Input 15 should return "FizzBuzz"
+```java
+assertEquals("FizzBuzz", FizzBuzz.fizzbuzz(15));
+```
+**Implementation**: Check for multiples of 15 first
+```java
+if (n % 15 == 0) return "FizzBuzz";
+else if (n % 3 == 0) return "Fizz";
+else if (n % 5 == 0) return "Buzz";
+else return String.valueOf(n);
+```
+
+### Iteration 5: Refactor and add edge cases
+Add tests for edge cases (0, large numbers) and multiple examples to ensure robustness.
 
 <br>
+
+## Test Suite
+
+The project includes 10 comprehensive tests following the AAA pattern (Arrange-Act-Assert):
+
+**Test Structure:**
+```java
+@Test
+void testName() {
+    // Arrange: Set up test data
+    int input = 3;
+    
+    // Act: Execute the functionality
+    String result = FizzBuzz.fizzbuzz(input);
+    
+    // Assert: Verify the result
+    assertEquals("Fizz", result);
+}
+```
+
+**Test Coverage:**
+1. Regular numbers (1, 2)
+2. Multiples of 3 (3, 9)
+3. Multiples of 5 (5, 10)
+4. Multiples of both 3 and 5 (15, 30)
+5. Edge case: zero (0)
+6. Sequence validation (1-15)
+
 <br>
 
-## Testing
+## Project Structure
 
-All SOLID principles have been validated with unit tests. The test suite includes 11 tests that verify real behavior and state changes.
+```
+tdd-lab/
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── escuelaing/arcn/tdd/
+│   │           └── FizzBuzz.java          # Implementation
+│   └── test/
+│       └── java/
+│           └── escuelaing/arcn/tdd/
+│               └── FizzBuzzTest.java      # Test suite (10 tests)
+├── ci-pipeline/
+│   └── maven-tests.yml                     # GitHub Actions workflow
+├── pom.xml                                 # Maven configuration
+└── README.md                               # This file
+```
 
-Run tests with:
+<br>
+
+## Running the Tests
+
+**Execute all tests:**
 ```bash
 mvn test
 ```
 
+**Run only FizzBuzz tests:**
+```bash
+mvn test -Dtest=FizzBuzzTest
+```
+
+**Clean and test:**
+```bash
+mvn clean test
+```
+
+**Expected output:**
+```
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
 <br>
-<br>
 
-## Requirements & Setup
+## Requirements
 
-> **Note**: This project uses DevContainer configuration, ensuring it works consistently across different development environments without manual setup.
-
-### Prerequisites
 - Java 21
-- Maven 3.x
+- Maven 3.9+
+- JUnit 5
 
-### Running the Project
-
-**Compile:**
-```bash
-mvn compile
-```
-
-**Run individual demos:**
-```bash
-java -cp target/classes escuelaing.arcn.solid.srp.SRPDemo
-java -cp target/classes escuelaing.arcn.solid.ocp.OCPDemo
-java -cp target/classes escuelaing.arcn.solid.lsp.LSPDemo
-java -cp target/classes escuelaing.arcn.solid.isp.ISPDemo
-java -cp target/classes escuelaing.arcn.solid.dip.DIPDemo
-```
-
-**Run tests:**
-```bash
-mvn test
-```
+Note: This project uses DevContainer configuration for consistent development environments.
 
 <br>
+
+## CI/CD Integration
+
+A GitHub Actions workflow file is provided in `ci-pipeline/maven-tests.yml`. To enable continuous integration:
+
+1. Copy `ci-pipeline/maven-tests.yml` to `.github/workflows/` in your repository root
+2. Commit and push to GitHub
+3. Tests will run automatically on every push and pull request
+
 <br>
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](../LICENSE) for details.
+This project is licensed under the GNU General Public License v3.0.
