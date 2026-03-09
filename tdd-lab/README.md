@@ -1,7 +1,7 @@
 <div align="center">
 
 ## TDD Laboratory - FizzBuzz
-Test-Driven Development practice with Java and JUnit 5
+Test-Driven Development practice
 By Andres Felipe Chavarro Plazas
 
 </div>
