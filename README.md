@@ -1,7 +1,7 @@
 <div align="center">
 
 ## Arquitectura Centrada En Negocio (ARCN)
-Labs repository — Escuela Colombiana de Ingeniería
+Labs repository for this subject
 By Andres Felipe Chavarro Plazas
 
 </div>
@@ -44,3 +44,9 @@ End-to-end walkthrough of creating, containerizing, and deploying a minimal REST
 ## Course Reference
 
 [https://eci-arcn.github.io/Labs/](https://eci-arcn.github.io/Labs/)
+
+<br>
+
+## License
+
+This project is licensed under the [GNU General Public License v3.0](./LICENSE) — you are free to use, modify, and distribute this code, provided that any derivative work is also distributed under the same license.
