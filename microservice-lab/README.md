@@ -102,7 +102,7 @@ Verify the endpoint responds:
 curl http://localhost:8080/hello
 ```
 
-![Application running locally — terminal showing Spring Boot startup logs and curl response](docs/01-app-running-local.png)
+![Application running locally — terminal showing Spring Boot startup logs and curl response](docs/app-running-local.png)
 
 <br>
 
@@ -116,7 +116,7 @@ mvn clean package
 
 This produces `target/microservice-helloworld-0.0.1-SNAPSHOT.jar`.
 
-![Maven build output showing BUILD SUCCESS and the generated JAR](docs/02-mvn-package.png)
+![Maven build output showing BUILD SUCCESS and the generated JAR](docs/mvn-package.png)
 
 <br>
 
@@ -136,7 +136,7 @@ Build the image:
 docker build -t microservice-helloworld .
 ```
 
-![Docker build output showing each layer being built and the final image ID](docs/03-docker-build.png)
+![Docker build output showing each layer being built and the final image ID](docs/docker-build.png)
 
 <br>
 
@@ -152,7 +152,7 @@ docker run -p 8080:8080 microservice-helloworld
 curl http://localhost:8080/hello
 ```
 
-![Terminal showing the containerized app responding to curl](docs/04-docker-run-local.png)
+![Terminal showing the containerized app responding to curl](docs/docker-run-local.png)
 
 <br>
 
@@ -169,21 +169,30 @@ docker push <tu-usuario>/microservice-helloworld
 
 > **Note:** `docker logout` is required first when working inside GitHub Codespaces, which pre-authenticates with its own registry.
 
-![Docker Hub showing the pushed image repository and its tags](docs/05-docker-hub.png)
+![Docker Hub showing the pushed image repository and its tags](docs/docker-hub.png)
 
 <br>
 
-### 6. Running on Play with Docker
+### 6. Running on Killercoda
 
-On [Play with Docker](https://labs.play-with-docker.com/), pull and run the image from Docker Hub:
+> **Note:** Play with Docker has been deprecated. [Killercoda](https://killercoda.com/) is used instead as the cloud Docker playground.
+
+On Killercoda, open a Ubuntu scenario that includes Docker. Pull and run the image from Docker Hub in **Terminal 1**:
 
 ```bash
 docker run -p 8080:8080 <tu-usuario>/microservice-helloworld
 ```
 
-Click the exposed port link in the Play with Docker UI and append `/hello` to the URL.
+Leave that terminal running (the server blocks it). Open a **second terminal** and verify the endpoint:
 
-![Play with Docker instance showing the running container and the Hello World response in the browser](docs/06-play-with-docker.png)
+```bash
+curl http://localhost:8080/hello
+```
+
+You should receive `Hello, World!` as the response.
+
+![Killercoda Terminal 1 — container running and Spring Boot startup logs](docs/play-with-docker.png)
+![Killercoda Terminal 2 — curl response showing Hello, World!](docs/play-with-docker-2.png)
 
 <br>
 
@@ -194,43 +203,8 @@ Click the exposed port link in the Play with Docker UI and append `/hello` to th
 - **Maven 3.9** — dependency management and build lifecycle
 - **Docker** — containerization
 - **Docker Hub** — public container registry
-- **Play with Docker** — ephemeral cloud Docker environment
+- **Killercoda** — ephemeral cloud Docker environment
 - **JUnit 5** — test framework
-
-<br>
-
-## Requirements & Setup
-
-> **Note**: This project includes a DevContainer configuration. Opening it in VS Code with the Dev Containers extension (or using GitHub Codespaces) provides a ready-to-use environment with Java 21, Maven, and Docker pre-installed — no manual setup required.
-
-### Prerequisites (without DevContainer)
-
-- Java 17+
-- Maven 3.x
-- Docker
-
-### Running the Project
-
-**Run the application:**
-```bash
-mvn spring-boot:run
-```
-
-**Run tests:**
-```bash
-mvn test
-```
-
-**Build the JAR:**
-```bash
-mvn clean package
-```
-
-**Build and run the Docker image:**
-```bash
-docker build -t microservice-helloworld .
-docker run -p 8080:8080 microservice-helloworld
-```
 
 <br>
 
