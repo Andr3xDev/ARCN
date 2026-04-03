@@ -10,34 +10,33 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertTrue;
 
 public class SearchSteps {
     private WebDriver driver;
 
-    @Before
+    @Before("@search")
     public void setUp() {
-        try {
-            System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--remote-allow-origins=*");
-            driver = new ChromeDriver(options);
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to initialize ChromeDriver", e);
-        }
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @Given("I am on the Google search page")
-    public void i_am_on_the_google_search_page() {
-        driver.get("https://www.google.com");
+    @Given("I am on the DuckDuckGo search page")
+    public void i_am_on_the_duckduckgo_search_page() {
+        driver.get("https://duckduckgo.com");
     }
 
     @When("I search for {string}")
@@ -49,10 +48,12 @@ public class SearchSteps {
 
     @Then("I should see {string} in the results")
     public void i_should_see_in_the_results(String term) {
-        assert driver.getPageSource().contains(term);
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+            .until(ExpectedConditions.urlContains("q="));
+        assertTrue(driver.getPageSource().contains(term));
     }
 
-    @After
+    @After("@search")
     public void tearDown() {
         driver.quit();
     }

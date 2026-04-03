@@ -6,7 +6,10 @@ import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.assertTrue;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import pages.*;
 
@@ -42,6 +45,8 @@ public class LoginSteps {
 
     @Then("the user should be redirected to the secure area")
     public void the_user_should_be_redirected_to_the_secure_area() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+            .until(ExpectedConditions.urlContains("/secure"));
         assertTrue(driver.getCurrentUrl().contains("/secure"));
     }
 
