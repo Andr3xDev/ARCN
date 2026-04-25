@@ -40,8 +40,9 @@ Second part of the BDD series, focused on structuring test code for real-world U
 End-to-end walkthrough of creating, containerizing, and deploying a minimal REST microservice using Spring Boot and Docker. The lab goes from scaffolding a project with Spring Initializr, adding a REST endpoint, packaging the application into a Docker image, and running it in a cloud environment via Play with Docker.
 
 <br>
+<br>
 
-### [project](./project)
+## Final project - MediSync
 Final project for the ARCN course. A full-stack medical appointment management system built with event-driven microservices, applying Hexagonal Architecture (Ports and Adapters) with Domain-Driven Design principles across all services.
 
 The system is composed of four NestJS backend services behind an API Gateway, a React frontend, PostgreSQL for persistence, and RabbitMQ for asynchronous event-based communication between services. Key highlights include:
